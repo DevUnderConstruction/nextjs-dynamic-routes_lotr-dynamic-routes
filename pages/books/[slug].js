@@ -1,9 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router.js";
 import books from "../../lib/books.js";
 
-export default function TwoTowers() {
-  const currentBook = books[1];
+export default function Books() {
+  const router = useRouter();
+  const { slug } = router.query;
+
+  const currentBook = books.find((book) => book.slug === slug);
 
   return (
     <>
@@ -15,7 +19,9 @@ export default function TwoTowers() {
         width={250}
         height={419}
       />
-      <Link href="/books">Back to overview</Link>
+      <p>
+        <Link href="/books">Back to overview</Link>
+      </p>
     </>
   );
 }
